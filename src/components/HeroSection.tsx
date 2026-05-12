@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Sparkles, QrCode, FileCheck } from "lucide-react"
+import { ArrowRight, Sparkles, QrCode, FileCheck, Phone } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export function HeroSection() {
@@ -123,6 +123,17 @@ export function HeroSection() {
             asChild
           >
             <a href="#services">Наши услуги</a>
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-2 border-primary/20 text-foreground hover:bg-primary/5 hover:border-primary font-semibold px-8 py-6 text-lg backdrop-blur-sm bg-transparent gap-2"
+            asChild
+          >
+            <a href="tel:+74953203385">
+              <Phone className="h-5 w-5" />
+              8 (495) 320-33-85
+            </a>
           </Button>
         </div>
 
