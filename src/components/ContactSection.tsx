@@ -174,7 +174,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Телефон</h3>
-                    <p className="text-sm text-muted-foreground">8 (495) 320-33-85</p>
+                    <a href="tel:+74953203385" className="text-sm text-muted-foreground hover:text-primary transition-colors">8 (495) 320-33-85</a>
                   </div>
                 </div>
               </CardContent>

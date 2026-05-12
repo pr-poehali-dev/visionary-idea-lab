@@ -40,7 +40,7 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Контакты</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>info@kassa-business.ru</li>
-              <li>8 (495) 320-33-85</li>
+              <li><a href="tel:+74953203385" className="hover:text-primary transition-colors">8 (495) 320-33-85</a></li>
               <li>Пн–Пт: 9:00–18:00</li>
             </ul>
           </div>
