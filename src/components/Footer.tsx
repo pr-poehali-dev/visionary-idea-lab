@@ -39,7 +39,7 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Контакты</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>hello@markirovkapro.ru</li>
+              <li>info@kassa-business.ru</li>
               <li>+7 900 123-45-67</li>
               <li>Пн–Пт: 9:00–18:00</li>
             </ul>

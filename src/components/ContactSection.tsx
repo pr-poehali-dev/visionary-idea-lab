@@ -4,7 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
+import func2url from "../../backend/func2url.json"
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -13,11 +14,23 @@ export function ContactSection() {
     phone: "",
     message: "",
   })
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("[v0] Form submitted:", formData)
-    // Handle form submission
+    setStatus("loading")
+    try {
+      const res = await fetch(func2url["send-email"], {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+      if (!res.ok) throw new Error()
+      setStatus("success")
+      setFormData({ name: "", email: "", phone: "", message: "" })
+    } catch {
+      setStatus("error")
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -113,9 +126,25 @@ export function ContactSection() {
                       className="transition-all focus:scale-[1.02]"
                     />
                   </div>
-                  <Button type="submit" size="lg" className="w-full sm:w-auto group">
-                    <Send className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    Отправить
+                  {status === "success" && (
+                    <div className="flex items-center gap-2 text-green-600 bg-green-50 border border-green-200 rounded-lg px-4 py-3">
+                      <CheckCircle className="h-5 w-5 flex-shrink-0" />
+                      <span className="text-sm font-medium">Заявка отправлена! Мы свяжемся с вами в ближайшее время.</span>
+                    </div>
+                  )}
+                  {status === "error" && (
+                    <div className="flex items-center gap-2 text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+                      <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                      <span className="text-sm font-medium">Ошибка отправки. Попробуйте ещё раз или напишите нам напрямую.</span>
+                    </div>
+                  )}
+                  <Button type="submit" size="lg" className="w-full sm:w-auto group" disabled={status === "loading"}>
+                    {status === "loading" ? (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                      <Send className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    )}
+                    {status === "loading" ? "Отправка..." : "Отправить"}
                   </Button>
                 </form>
               </CardContent>
@@ -131,7 +160,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">E-mail</h3>
-                    <p className="text-sm text-muted-foreground">hello@example.com</p>
+                    <p className="text-sm text-muted-foreground">info@kassa-business.ru</p>
                   </div>
                 </div>
               </CardContent>
