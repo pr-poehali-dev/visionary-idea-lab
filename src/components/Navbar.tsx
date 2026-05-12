@@ -2,6 +2,7 @@ import { ThemeToggle } from "@/components/ThemeToggle"
 import { Logo } from "@/components/Logo"
 import { MobileMenu } from "@/components/MobileMenu"
 import { useState, useEffect } from "react"
+import { Phone } from "lucide-react"
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -44,7 +45,14 @@ export function Navbar() {
             </a>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
+            <a
+              href="tel:+74953203385"
+              className="hidden md:flex items-center gap-2 text-sm font-semibold hover:text-primary transition-colors"
+            >
+              <Phone className="h-4 w-4 text-primary" />
+              8 (495) 320-33-85
+            </a>
             <ThemeToggle />
             <MobileMenu />
           </div>
